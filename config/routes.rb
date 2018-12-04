@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, only: [] do
         resources :like, as: :likes, only: :create
       end
+      resources :matches, only: [:index, :destroy]
     end
   end
 end
