@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_093445) do
+ActiveRecord::Schema.define(version: 2018_12_04_214519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2018_12_04_093445) do
     t.index ["liker_id"], name: "index_likes_on_liker_id"
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.bigint "matcher_id"
+    t.bigint "matchee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matchee_id"], name: "index_matches_on_matchee_id"
+    t.index ["matcher_id"], name: "index_matches_on_matcher_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.boolean "default", default: false
     t.bigint "user_id"
@@ -73,5 +82,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_093445) do
 
   add_foreign_key "likes", "users", column: "likee_id"
   add_foreign_key "likes", "users", column: "liker_id"
+  add_foreign_key "matches", "users", column: "matchee_id"
+  add_foreign_key "matches", "users", column: "matcher_id"
   add_foreign_key "photos", "users"
 end
