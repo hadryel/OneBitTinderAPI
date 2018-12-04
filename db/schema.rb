@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_02_012955) do
+ActiveRecord::Schema.define(version: 2018_12_04_093445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2018_12_02_012955) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean "liked"
+    t.bigint "liker_id"
+    t.bigint "likee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likee_id"], name: "index_likes_on_likee_id"
+    t.index ["liker_id"], name: "index_likes_on_liker_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -61,5 +71,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_012955) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "likes", "users", column: "likee_id"
+  add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "photos", "users"
 end
