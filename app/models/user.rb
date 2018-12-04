@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :photos
+  has_many :likes_given, class_name: "Like", foreign_key: "liker_id"
+  has_many :likes_earned, class_name: "Like", foreign_key: "likee_id"
 end
