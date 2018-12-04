@@ -1,6 +1,6 @@
 class Api::V1::MatchesController < ApplicationController
   def index
-    @matches = current_user.matches
+    @matches = current_user.matches.paginate(page: params[:page] || 1)
   end
 
 
