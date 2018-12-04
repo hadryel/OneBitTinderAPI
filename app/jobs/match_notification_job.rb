@@ -1,8 +1,8 @@
 class MatchNotificationJob < ApplicationJob
   queue_as :default
 
-  def perform(like)
-    puts "Liker = #{like.liker.name}"
-    puts "Likee = #{like.likee.name}"
+  def perform(match)
+    puts "Matcher = #{match.matcher.name}"
+    puts "Matchee = #{match.matchee.name}"
   end
 end
