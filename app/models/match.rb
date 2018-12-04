@@ -1,4 +1,6 @@
 class Match < ApplicationRecord
+  self.per_page = 10
+  
   belongs_to :matcher, class_name: "User"
   belongs_to :matchee, class_name: "User"
   
