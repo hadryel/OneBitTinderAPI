@@ -5,8 +5,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       ## Custom fields
       t.string :name
-      t.string :latitude, default: 0
-      t.string :longitude, default: 0
+      t.float :latitude, default: 0
+      t.float :longitude, default: 0
+      t.string :college
+      t.string :company
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
