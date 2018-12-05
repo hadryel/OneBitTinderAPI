@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_235803) do
+ActiveRecord::Schema.define(version: 2018_12_05_105940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+  enable_extension "postgis_topology"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +36,18 @@ ActiveRecord::Schema.define(version: 2018_12_04_235803) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "layer", primary_key: ["topology_id", "layer_id"], force: :cascade do |t|
+    t.integer "topology_id", null: false
+    t.integer "layer_id", null: false
+    t.string "schema_name", null: false
+    t.string "table_name", null: false
+    t.string "feature_column", null: false
+    t.integer "feature_type", null: false
+    t.integer "level", default: 0, null: false
+    t.integer "child_id"
+    t.index ["schema_name", "table_name", "feature_column"], name: "layer_schema_name_table_name_feature_column_key", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -73,10 +87,25 @@ ActiveRecord::Schema.define(version: 2018_12_04_235803) do
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
+  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+    t.string "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string "srtext", limit: 2048
+    t.string "proj4text", limit: 2048
+  end
+
+  create_table "topology", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "srid", null: false
+    t.float "precision", null: false
+    t.boolean "hasz", default: false, null: false
+    t.index ["name"], name: "topology_name_key", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "latitude", default: "0"
-    t.string "longitude", default: "0"
+    t.float "latitude", default: 0.0
+    t.float "longitude", default: 0.0
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -90,6 +119,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_235803) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "layer", "topology", name: "layer_topology_id_fkey"
   add_foreign_key "likes", "users", column: "likee_id"
   add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "matches", "users", column: "matchee_id"
