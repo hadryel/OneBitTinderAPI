@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       resources :matches, only: [:index, :destroy]
       resources :chat, as: :chats, only: [:index]
+      resources :selection_lists, only: :index
     end
   end
 end
