@@ -12,7 +12,7 @@ module SelectionListService
 
 
   def self.load_selection_list
-    except_users = liked_users + users_dont_liked_me + [@current_user.id]
+    except_users = liked_users + users_didnt_like_me + [@current_user.id]
     User.where.not(id: except_users)
         .where("#{distance_formula} < 15000")
         .select("users.*, #{distance_formula} as distance")
@@ -25,8 +25,8 @@ module SelectionListService
   end
 
 
-  def self.users_dont_liked_me
-    @users_dont_like_me ||= @current_user.likes_earned.where(liked: false).map { |like| like.liker.id }
+  def self.users_didnt_like_me
+    @users_didnt_like_me ||= @current_user.likes_earned.where(liked: false).map { |like| like.liker.id }
   end
 
 
