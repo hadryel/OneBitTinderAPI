@@ -8,7 +8,7 @@ gem 'devise', '~> 4.5.0'
 gem 'jbuilder'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
-gem 'rack-cors'
+gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.1'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'will_paginate', '~> 3.1.0'
@@ -16,6 +16,7 @@ gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'faker'
 end
 
 group :development do
