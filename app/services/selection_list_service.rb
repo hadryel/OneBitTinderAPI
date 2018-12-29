@@ -21,12 +21,12 @@ module SelectionListService
 
 
   def self.liked_users
-    @liked_users ||= @current_user.likes_given.map { |like| like.likee.id }
+    @current_user.likes_given.map { |like| like.likee.id }
   end
 
 
   def self.users_didnt_like_me
-    @users_didnt_like_me ||= @current_user.likes_earned.where(liked: false).map { |like| like.liker.id }
+    @current_user.likes_earned.where(liked: false).map { |like| like.liker.id }
   end
 
 
@@ -37,10 +37,10 @@ module SelectionListService
 
 
   def self.user_that_liked_me
-    @liked_me ||= User.includes(:likes_given)
-                      .where(likes: { likee_id: @current_user.id, liked: true })
-                      .where.not(id: liked_users)
-                      .select("users.*, #{distance_formula} as distance")
-                      .first
+    User.includes(:likes_given)
+        .where(likes: { likee_id: @current_user.id, liked: true })
+        .where.not(id: liked_users)
+        .select("users.*, #{distance_formula} as distance")
+        .first
   end
 end
