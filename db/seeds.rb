@@ -57,7 +57,6 @@ ActiveRecord::Base.transaction do
   chow_chow = User.create(name: "Chow Chow", email: "chow_chow@dog.com", password: "123456", password_confirmation: "123456",
                           company: Faker::Company.name, college: Faker::Science.scientist)
   2.times { chow_chow.photos.create }
-  chow_chow.photos.create
   chow_chow.photos.first.file.attach(io: File.open("#{photo_dir}/chow_chow_01.jpg"), filename: "chow_chow_01.jpg")
   chow_chow.photos.second.file.attach(io: File.open("#{photo_dir}/chow_chow_02.jpg"), filename: "chow_chow_02.jpg")
 
