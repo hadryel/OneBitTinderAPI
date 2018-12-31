@@ -11,7 +11,6 @@ gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.1'
 gem 'simple_token_authentication', '~> 1.0'
-gem 'will_paginate', '~> 3.1.0'
 
 
 group :development, :test do
