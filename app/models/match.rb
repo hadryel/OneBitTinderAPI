@@ -1,7 +1,7 @@
 class Match < ApplicationRecord
   belongs_to :matcher, class_name: "User"
   belongs_to :matchee, class_name: "User"
-  has_many :messages
+  has_many :messages, dependent: :delete_all
   
   validates_with MatchWithSameUsersValidator
 
@@ -9,6 +9,6 @@ class Match < ApplicationRecord
 
 
   def notify_users
-    MatchNotificationJob.perform_later(self)
+    MatchNotificationJob.perform_now(self)
   end
 end
