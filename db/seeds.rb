@@ -1,4 +1,4 @@
-photo_dir = Rails.root.join("tmp/seed_images")
+photo_dir = Rails.root.join("db/seed_images")
 
 
 # CREATE USERS
