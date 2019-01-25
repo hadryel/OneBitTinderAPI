@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   scope '/api/v1', defaults: { format: :json } do
     devise_for :users
   end
