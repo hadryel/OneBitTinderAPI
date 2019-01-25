@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_105940) do
     t.float "longitude", default: 0.0
     t.string "college"
     t.string "company"
+    t.text "description"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

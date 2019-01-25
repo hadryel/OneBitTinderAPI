@@ -9,6 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.float :longitude, default: 0
       t.string :college
       t.string :company
+      t.text :description
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
