@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:811e3e107c31f0f171c93d4eac8e73ec@hammerjaw.redistogo.com:10091/ #<%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: redis://redistogo:811e3e107c31f0f171c93d4eac8e73ec@hammerjaw.redistogo.com:10091/
   channel_prefix: onebitinder_api_production
