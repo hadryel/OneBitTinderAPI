@@ -9,9 +9,9 @@ gem 'jbuilder'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2'
 gem 'simple_token_authentication', '~> 1.0'
-
+gem 'aws-sdk-s3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
