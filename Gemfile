@@ -16,7 +16,7 @@ gem 'redis'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'faker'
+  gem 'faker', '1.9.1'
 end
 
 group :development do
