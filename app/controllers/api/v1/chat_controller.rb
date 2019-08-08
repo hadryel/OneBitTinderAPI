@@ -5,4 +5,12 @@ class Api::V1::ChatController < ApplicationController
                                     .group(:id).having("COUNT(messages.*) > 0").order("created_at DESC")
     render "api/v1/matches/index"
   end
+
+  def show
+    page = params[:page] || 1
+
+    match = Match.find(params[:id])
+
+    @messages = match.messages
+  end
 end

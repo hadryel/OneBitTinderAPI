@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         resources :like, as: :likes, only: :create
       end
       resources :matches, only: [:index, :destroy]
-      resources :chat, as: :chats, only: [:index]
+      resources :chat, as: :chats, only: [:index, :show]
       resources :selection_lists, only: :index
     end
   end
